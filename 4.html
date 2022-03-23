@@ -31,7 +31,7 @@
   const userNumber = prompt("Введите число");
   const segment = Math.trunc(userNumber / 10);
   const   unit = userNumber - (segment * 10);
-  let hundred  = Math.trunc( userNumber / 100);;
+  const hundred  = Math.trunc( userNumber / 100);;
   const dozen = Math.trunc((userNumber-(hundred * 100))/10);
   console.log(`В числе ${userNumber} количество сотен ${hundred }, количество десятков ${dozen}, количество единиц ${unit}.`);
   alert(`В числе ${userNumber} количество сотен ${hundred }, количество десятков ${dozen}, количество единиц ${unit}.`);
