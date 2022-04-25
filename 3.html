@@ -2,41 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Homework</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <style>
+    i {
+      font-size: 50px;
+    }
+    .golden {
+      color: gold;
+    }
+  </style>
 </head>
 <body>
 <!--
 Обязательное задание.
 
-Необходимо вывести в консоль значения выражений:
-10 + 10 + "10"
-10 + "10" + 10
-10 + 10 + +"10"
-10 / -""
-10 / +"2,5"
-В этих выражениях нет опечаток, вам их нужно скопировать и вывести в консоль.
-
-Над каждым выводом в консоль необходимо объяснить почему мы получаем такой
-результат.
-
-Объяснения пишите в таком формате:
-/*
-1. 4 умножаем на 2 получаем 8.
-2. 3 минус 8 получаем -5.
-3. С помощью console.log выводим число -5 в консоль.
-*/
-console.log(3 - 4 * 2);
+Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
+стирать, код с решением задачи пишем под комментарием.
 -->
+
+<div class="stars_container">
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+</div>
+
 <script>
   "use strict";
 
-  console.log(10 + 10 + "10");//10 прибавляем к 10 получаем 20 и склеиваем ее со строкой "10". Получаем: 2010;
-  console.log(10 + "10" + 10);//10 склеиваем cо строкой "10" и еще раз склеиваем получившуюся строку с 10. Получаем; 101010;
-  console.log(10 + 10 + +"10");//10 прибавляем 10 и еще раз прибавляем преобразованную с помощью + строку "10" в число. Получаем: 30;
-  console.log(10 / -"");//к 10 применяем деление с отрицательным неопределенным числом. Получаем: -Infinity - бесконечность;
-  console.log(10 / +"2,5");/*К 10 применяем деление на преобразованное из строки с помощью + число, но оно записано неправильно, с запятой вместо точки,
-                           поэтому js не считает его, как число. Получаем: NaN - не число;*/
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  /*
+  1. При наведении на любую из звезд, данной звезде должен ставиться класс
+  golden, также такой класс должен ставиться всем звездам до нее слева.
+  */
+ /*Почему у Вас идет проверка на не совпадение класса ведь, если поставить 
+ проверку на совпадение, то при несовпадении класса выполнение кода должно
+  же останавливаться в первых скобках if ?
+  А через for или forEach можно было сделать? У меня не получилось)
+  И в интернете есть свойство предыдущих эл. prev и prevAll, не сработало почему-то. 
+*/ 
+ const starsEl = document.querySelector('.stars_container');
+  starsEl.addEventListener('mouseover',el => {
+   if(el.target.classList.contains('fas')) {
+    let fasEl = el.target;
+     do {
+    fasEl.classList.add('golden');
+    fasEl = fasEl.previousElementSibling;
+     } while(fasEl);
+   }
+  });
+ 
+  /*
+  2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
+  задания должны быть удалены.
+   */
+  
+   starsEl.addEventListener('mouseout',el => {
+   if(el.target.classList.contains('fas')) {
+    let fasEl = el.target;
+     do {
+    fasEl.classList.remove('golden');
+    fasEl = fasEl.previousElementSibling;
+     } while(fasEl);
+   }
+  });
+  /*
+  3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
+  звезды (временно могут становиться черными). Почему так? Напишите словами.
+  Можем ли мы это исправить? Если да, то предложите решение.
+  */
+  /*Звезды мигают, потому что между ними есть пространство на которое не
+   распространяется событие при наведении курсора.Логичнее было бы в стилях 
+   задать падинги слева и справ звездам, чтобы этого пространства не было.
+   Через js мне не удалось задать падинги, а маржины слепляют звезды.
+   Это при наведении мышки:
+   starsEl.addEventListener( 'mouseout',event => {
+    event.target.style.marginRight = '-5px';
+   });*/
+   document.querySelectorAll('.fas').forEach(el => {
+    el.style.marginRight = '-5px';
+    
+  });
+
 </script>
 </body>
 </html>
