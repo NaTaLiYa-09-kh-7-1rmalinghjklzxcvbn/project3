@@ -2,90 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-  <style>
-    i {
-      font-size: 50px;
-    }
-    .golden {
-      color: gold;
-    }
-  </style>
+  <title>Homework</title>
 </head>
 <body>
 <!--
-Обязательное задание.
+Необязательное задание.
 
-Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
-стирать, код с решением задачи пишем под комментарием.
+Ваша задача - создать функцию, которая может принимать любое неотрицательное
+целое число в качестве аргумента и возвращать число с теми же цифрами, но в
+порядке убывания.
+Если проще - переставьте цифры, чтобы получить максимально возможное число из
+данного набора цифр.
 -->
-
-<div class="stars_container">
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-</div>
-
 <script>
   "use strict";
 
-  /*
-  1. При наведении на любую из звезд, данной звезде должен ставиться класс
-  golden, также такой класс должен ставиться всем звездам до нее слева.
-  */
- /*Почему у Вас идет проверка на не совпадение класса ведь, если поставить 
- проверку на совпадение, то при несовпадении класса выполнение кода должно
-  же останавливаться в первых скобках if ?
-  А через for или forEach можно было сделать? У меня не получилось)
-  И в интернете есть свойство предыдущих эл. prev и prevAll, не сработало почему-то. 
-*/ 
- const starsEl = document.querySelector('.stars_container');
-  starsEl.addEventListener('mouseover',el => {
-   if(el.target.classList.contains('fas')) {
-    let fasEl = el.target;
-     do {
-    fasEl.classList.add('golden');
-    fasEl = fasEl.previousElementSibling;
-     } while(fasEl);
-   }
-  });
- 
-  /*
-  2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
-  задания должны быть удалены.
+  /**
+   * Функция перемещает цифры получая наибольшее число.
+   * @param {number} n - Число, из цифр которого нужно составить наибольшее
+   * возможное число с теми же цифрами.
+   * @returns {number} - Набольшее число из набора цифр числа, переданного в
+   * параметр "n"
    */
-  
-   starsEl.addEventListener('mouseout',el => {
-   if(el.target.classList.contains('fas')) {
-    let fasEl = el.target;
-     do {
-    fasEl.classList.remove('golden');
-    fasEl = fasEl.previousElementSibling;
-     } while(fasEl);
-   }
-  });
-  /*
-  3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
-  звезды (временно могут становиться черными). Почему так? Напишите словами.
-  Можем ли мы это исправить? Если да, то предложите решение.
-  */
-  /*Звезды мигают, потому что между ними есть пространство на которое не
-   распространяется событие при наведении курсора.Логичнее было бы в стилях 
-   задать падинги слева и справ звездам, чтобы этого пространства не было.
-   Через js мне не удалось задать падинги, а маржины слепляют звезды.
-   Это при наведении мышки:
-   starsEl.addEventListener( 'mouseout',event => {
-    event.target.style.marginRight = '-5px';
-   });*/
-   document.querySelectorAll('.fas').forEach(el => {
-    el.style.marginRight = '-5px';
-    
-  });
+  function descendingOrder(n) {
+   
+   let n1 = +n.toString().split('').sort((a, b) => b - a).join('');
 
+   return n1
+  }
+
+  console.log(descendingOrder(42145)); // 54421
+  console.log(descendingOrder(145263)); // 654321
+  console.log(descendingOrder(123456789)); // 987654321
 </script>
 </body>
 </html>
